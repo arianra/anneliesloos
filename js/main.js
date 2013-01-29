@@ -1,8 +1,9 @@
 /*
- * @author ︻╦╤─  VILE RAISIN ─╤╦︻
- * @version 0.1
- * @required Underscore.js & jQuery
- * @copyleft <3 annelies
+ * @author 		︻╦╤─  VILE RAISIN ─╤╦︻
+ * @version 	0.1
+ * @required 	Underscore.js & jQuery
+ * @github		http://github.com/dizzyone/anneliesloos
+ * @copyleft 	<3 annelies
 */
 
 var LL = LL || {}; //namespace
@@ -236,7 +237,7 @@ var LL = LL || {}; //namespace
 	//
 	// debug
 	//
-	var fooTime = new LL.TillLies( "01/26/2013 19:01:00" );
+	var fooTime = new LL.TillLies( "01/31/2013 19:01:00" );
 	fooTime.initElapsedUnits();
 	console.log(fooTime.elapsedHours());
 	LL.contentData.valueHours = fooTime.elapsedHours();
