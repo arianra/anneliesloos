@@ -106,20 +106,20 @@ var LL = LL || {}; //namespace
 		 * @desc Converts bytes into hex.
 		 * @example foo.bToHex(255) => "ff"
 		*/
-		bToHex: function(b){
+		bToHex: _.memoize(function(b){
 			return Number(b).toString(16);
-		},
+		}),
 		/*
 		 * @desc Returns exactly 120 degrees * m
 		*/
-		getPI120: function(m){
+		getPI120: _.memoize(function(m){
 			var mu = typeof m === 'undefined' ? 1 : m;
 			return mu*Math.PI/3;
-		},
-		getSteppedFrequency:function(s){
+		}),
+		getSteppedFrequency: _.memoize(function(s){
 			var step = typeof s === 'undefined' ? 0.21 : s;
 			return Math.PI*2/step;
-		},
+		}),
 		getFixedRainbow: function(cObj){
 			if(typeof cObj === 'undefined' || typeof cObj !== 'object' ) throw "No Object passed.";
 			return function(i){

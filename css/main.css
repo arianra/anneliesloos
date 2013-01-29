@@ -74,7 +74,7 @@ body {
     line-height: 1;
 }
 
-header h1.title{
+.title{
     margin: .1em .1em;
     transform: rotate(-2deg);
     -ms-transform: rotate(-2deg); /* IE 9 */
@@ -85,7 +85,7 @@ header h1.title{
 
 }
 
-article#content-main-container{
+#content-main-container{
     transform: rotate(-5deg);
     -ms-transform: rotate(-5deg); /* IE 9 */
     -webkit-transform: rotate(-5deg); /* Safari and Chrome */
@@ -93,13 +93,13 @@ article#content-main-container{
     -moz-transform: rotate(-5deg); /* Firefox */
 }
 
-article#content-main-container h4{
+#content-main-container h4{
     margin:.2em auto;
     width:70%;
     text-shadow: .06em .08em .2em rgb(167, 167, 167);
 }
 
-article#content-main-container p{
+#content-main-container p{
     text-align: center;
     font-size: 3em;
     margin: .05em auto .4em auto;
