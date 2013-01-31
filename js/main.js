@@ -234,10 +234,19 @@ var LL = LL || {}; //namespace
 		valueSeconds:""
 	}
 
+	LL.LoesView = function(tLies, cData, templ, el){
+		this.tillLies = tLies;
+		this.contentData = cData;
+		this.template = templ;
+		this.el = el;
+	};
+
+	
+
 	//
 	// debug
 	//
-	var fooTime = new LL.TillLies( "01/31/2013 19:01:00" );
+	var fooTime = new LL.TillLies( "02/01/2013 23:01:00" );
 	fooTime.initElapsedUnits();
 	console.log(fooTime.elapsedHours());
 	LL.contentData.valueHours = fooTime.elapsedHours();
