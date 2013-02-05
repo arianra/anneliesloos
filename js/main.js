@@ -31,12 +31,12 @@ var LL = LL || {}; //namespace
 	}
 
 	LL.lastFirst = function(a){
-		if( !(a instanceof Array) ) throw "lastFirst() needs an Array to be passed."
+		if( !(a instanceof Array) ) throw "lastFirst() needs an Array to be passed.";
 		var x = a.pop();
 		this.unshift(x);
 	};
 	LL.firstLast = function(a){
-		if( !(a instanceof Array) ) throw "firstLast() needs an Array to be passed."
+		if( !(a instanceof Array) ) throw "firstLast() needs an Array to be passed.";
 		var x = a.shift();
 		this.push(x);
 	};
@@ -128,7 +128,7 @@ var LL = LL || {}; //namespace
 				return {
 					red: Math.round(Math.sin( cObj.freq[0] * i + cObj.phase[0] ) * cObj.width + cObj.center),
 					green: Math.round(Math.sin( cObj.freq[1] * i + cObj.phase[1] ) * cObj.width + cObj.center),
-					blue: Math.round(Math.sin( cObj.freq[2] * i + cObj.phase[2] ) * cObj.width + cObj.center),
+					blue: Math.round(Math.sin( cObj.freq[2] * i + cObj.phase[2] ) * cObj.width + cObj.center)
 				};
 			};
 		},
@@ -170,13 +170,13 @@ var LL = LL || {}; //namespace
 					result.push(" " + name + "=\"" + attributes[name] + "\"");
 				}
 				return result.join("");
-			};
+			}
 			function renderElement(element) {
 				var self = this;
 				if(typeof element === 'string') {
 					parts.push(element);
-				} else if(!element.content || element.content.length == 0 || typeof element.content === undefined) {
-					parts.push("<" + element.tag + renderAttributes(element.attributes) + "/>")
+				} else if(!element.content || element.content.length === 0 || typeof element.content === undefined) {
+					parts.push("<" + element.tag + renderAttributes(element.attributes) + "/>");
 				} else {
 					parts.push("<" + element.tag + renderAttributes(element.attributes) + ">");
 					$.each(element.content, function(i, e) {
@@ -184,7 +184,7 @@ var LL = LL || {}; //namespace
 					});
 					parts.push("</" + element.tag + ">");
 				}
-			};
+			}
 			renderElement(element);
 			return parts.join("");
 		}
@@ -225,6 +225,30 @@ var LL = LL || {}; //namespace
 		}
 	};
 
+	LL.LiesView = function(model){
+		//setinterval logica en dergelijke, render functie. renderfunctie aanroepen in queue.
+	};
+
+	LL.LiesModel = function(data){
+		this.defaults = {
+			//Please, pretty. This. MVC. Thank you.
+			contentData: LL.contentData,
+			template: _.template( $('.template').html() ),
+			tillLies: new LL.TillLies( Date.now()+(86400000) ), //cry2sleep. advances now by a day
+			el: $('.main')
+		};
+		this.data = _.defaults( {} , data , this.defaults );
+
+		this.getData = function(keyArray){ 
+			var data = ((typeof keyArray === undefined) && (keyArray instanceof Array) ) ? this.data : _.pick( this.data , keyArray );
+			return data;
+		};
+		this.setData = function(newData){
+			this.data = _.defaults( {} , newData , this.data , this.defaults );
+			return this.data;
+		};
+	};
+
 	LL.contentData = {
 		titleHours:"Hopeloze uurtjes tot Annelies mijn trui komt opeisen:",
 		valueHours:"",
@@ -232,14 +256,8 @@ var LL = LL || {}; //namespace
 		valueMinutes:"",
 		titleSeconds:"Troosteloze seconden tot Annelies aan komt fietsen:",
 		valueSeconds:""
-	}
-
-	LL.LoesView = function(tLies, cData, templ, el){
-		this.tillLies = tLies;
-		this.contentData = cData;
-		this.template = templ;
-		this.el = el;
 	};
+
 
 	
 
@@ -254,7 +272,7 @@ var LL = LL || {}; //namespace
 	LL.contentData.valueSeconds = fooTime.elapsedSeconds();
 
 	var fooTemplate = _.template( $('.template').html() , LL.contentData , {variable: 'll'} );
-	$('.main').prepend( fooTemplate )
+	$('.main').prepend( fooTemplate );
 
 	//een goeie manier is waarschijnlijk om eerst de template te nemen, vervolgens de tekst
 	//erin plompen, misschien nog escapen en taggen etc.
@@ -264,6 +282,6 @@ var LL = LL || {}; //namespace
 	var fooboo = LL.Rainbow.createRainbowArray( LL.Rainbow.createComponents( len,undefined,[4,0,2] ) );
 	for( var i = 0; i < len; i++ ){
 		$('.main article.hearts').append( '<span style=\"color:'+ fooboo[i]+ '\"> &#9829; </span> ' );
-	};
+	}
 
 })(jQuery);
