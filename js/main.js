@@ -226,6 +226,15 @@ var LL = LL || {}; //namespace
 	};
 
 	LL.LiesView = function(model){
+		this.model = typeof model !== undefined ? model : new LiesModel();
+
+		this.init = function(){
+			this.model.initElapsedUnits();
+		};
+
+		this.render = function(){
+
+		};
 		//setinterval logica en dergelijke, render functie. renderfunctie aanroepen in queue.
 	};
 
@@ -264,24 +273,33 @@ var LL = LL || {}; //namespace
 	//
 	// debug
 	//
-	var fooTime = new LL.TillLies( "02/01/2013 23:01:00" );
+	var fooTime = new LL.TillLies( "02/14/2013 20:00:00" );
 	fooTime.initElapsedUnits();
-	console.log(fooTime.elapsedHours());
+
 	LL.contentData.valueHours = fooTime.elapsedHours();
 	LL.contentData.valueMinutes = fooTime.elapsedMinutes();
 	LL.contentData.valueSeconds = fooTime.elapsedSeconds();
 
 	var fooTemplate = _.template( $('.template').html() , LL.contentData , {variable: 'll'} );
-	$('.main').prepend( fooTemplate );
+	var fooContainer = $('.content-main-container');
+	fooContainer.prepend( fooTemplate );
 
-	//een goeie manier is waarschijnlijk om eerst de template te nemen, vervolgens de tekst
-	//erin plompen, misschien nog escapen en taggen etc.
-	//dan pas aan het einde door de template te gaan en de color style toetepassen, op alles
-	//behalve tags, tags dus skippen.
+	var everySecond = window.setInterval(function(){
+		fooTime.currentTime = new Date();
+		LL.contentData.valueHours = fooTime.elapsedHours();
+		LL.contentData.valueMinutes = fooTime.elapsedMinutes();
+		LL.contentData.valueSeconds = fooTime.elapsedSeconds();
+		fooTemplate = _.template( $('.template').html() , LL.contentData , {variable: 'll'} );
+		fooContainer.html('').prepend( fooTemplate );
+
+	},1000);
+
 	var len = 2003;
 	var fooboo = LL.Rainbow.createRainbowArray( LL.Rainbow.createComponents( len,undefined,[4,0,2] ) );
 	for( var i = 0; i < len; i++ ){
-		$('.main article.hearts').append( '<span style=\"color:'+ fooboo[i]+ '\"> &#9829; </span> ' );
+		$(LL.HTMLFab.render(LL.HTMLFab.tag('span',' &#9829; ',{style:'color:'+fooboo[i]}))).appendTo('article.hearts');
+
 	}
+
 
 })(jQuery);
